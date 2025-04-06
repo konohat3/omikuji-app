@@ -1,57 +1,57 @@
-!DOCTYPE html
-html lang=ja
-head
-  meta charset=UTF-8
-  titleおみくじtitle
-  style
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>おみくじアプリ</title>
+  <style>
     body {
-      font-family 'Yu Mincho', 'Hiragino Mincho ProN', serif;
-      text-align center;
-      padding-top 100px;
-      background-color #fff8f0;
-    }
-    .torii {
-      margin 20px 0;
+      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #fff8f0;
     }
     h1 {
-      font-size 40px;
-      color #8b0000;
-      margin-bottom 10px;
+      font-size: 40px;
+      color: #8b0000;
+      margin-bottom: 10px;
+    }
+    .torii {
+      margin: 20px 0;
     }
     .result {
-      font-size 28px;
-      margin 30px 0;
-      color #444;
+      font-size: 28px;
+      margin: 30px 0;
+      color: #444;
     }
     button {
-      padding 12px 24px;
-      font-size 20px;
-      background-color #b22222;
-      color white;
-      border none;
-      border-radius 8px;
-      cursor pointer;
-      box-shadow 2px 2px 5px rgba(0,0,0,0.2);
+      padding: 12px 24px;
+      font-size: 20px;
+      background-color: #b22222;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     }
-    buttonhover {
-      background-color #8b0000;
+    button:hover {
+      background-color: #8b0000;
     }
-  style
-head
-body
-  h1おみくじh1
-  div class=torii
-    img src=torii.jpg alt=鳥居 width=180
-  div
-  button onclick=draw()おみくじを引くbutton
-  div id=result class=resultdiv
+  </style>
+</head>
+<body>
+  <h1>おみくじ</h1>
+  <div class="torii">
+    <img src="torii.jpg" alt="鳥居" width="180">
+  </div>
+  <button onclick="draw()">おみくじを引く</button>
+  <div id="result" class="result"></div>
 
-  script
+  <script>
     function draw() {
-      const dice1 = Math.floor(Math.random()  8) + 1;
-      const dice2 = Math.floor(Math.random()  8) + 1;
-      document.getElementById(result).innerHTML = `🎲 上：${dice1}br🎲 下：${dice2}`;
+      const dice1 = Math.floor(Math.random() * 8) + 1;
+      const dice2 = Math.floor(Math.random() * 8) + 1;
+      document.getElementById("result").innerHTML = `🎲 上：${dice1}<br>🎲 下：${dice2}`;
     }
-  script
-body
-html
+  </script>
+</body>
+</html>
