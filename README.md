@@ -1,0 +1,2 @@
+# omikuji-app
+おみくじ
