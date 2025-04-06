@@ -1,11 +1,74 @@
+from flask import Flask, render_template_string, request
+import random
+
+app = Flask(__name__)
+
+HTML_TEMPLATE = """
 <!DOCTYPE html>
-<html lang="ja">
+<html lang=\"ja\">
 <head>
-  <meta charset="UTF-8">
-  <title>おみくじ</title>
+    <meta charset=\"UTF-8\">
+    <title>おみくじ</title>
+    <style>
+        body {
+            font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #fff8f0;
+        }
+        .torii {
+            margin: 20px 0;
+        }
+        h1 {
+            font-size: 40px;
+            color: #8b0000;
+            margin-bottom: 10px;
+        }
+        .result {
+            font-size: 28px;
+            margin: 30px 0;
+            color: #444;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 20px;
+            background-color: #b22222;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        button:hover {
+            background-color: #8b0000;
+        }
+    </style>
 </head>
 <body>
-  <h1>おみくじアプリ</h1>
-  <p>ここにおみくじが表示されます。</p>
+    <h1>おみくじ</h1>
+    <div class=\"torii\">
+        <img src=\"/static/torii.jpg\" alt=\"鳥居\" width=\"180\">
+    </div>
+    <form method=\"post\">
+        <button type=\"submit\">おみくじを引く</button>
+    </form>
+    {% if dice1 and dice2 %}
+        <div class=\"result\">
+            🎲 上：{{ dice1 }}<br>
+            🎲 下：{{ dice2 }}
+        </div>
+    {% endif %}
 </body>
 </html>
+"""
+
+@app.route("/", methods=["GET", "POST"])
+def omikuji():
+    dice1 = dice2 = None
+    if request.method == "POST":
+        dice1 = random.randint(1, 8)
+        dice2 = random.randint(1, 8)
+    return render_template_string(HTML_TEMPLATE, dice1=dice1, dice2=dice2)
+
+if __name__ == "__main__":
+    app.run(debug=True)
