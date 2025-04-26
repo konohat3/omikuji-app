@@ -1,71 +1,69 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>易おみくじ</title>
-    <style>
-        body {
-            font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
-            text-align: center;
-            background-color: #fffaf5;
-            padding: 40px 20px;
-        }
-        h1 {
-            font-size: 28px;
-            color: #8B0000;
-            margin-bottom: 20px;
-        }
-        .date {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 14px;
-            font-size: 18px;
-            width: 80%;
-            max-width: 300px;
-            box-sizing: border-box;
-        }
-        button {
-            margin-top: 20px;
-            padding: 14px 24px;
-            font-size: 18px;
-            background-color: #8B0000;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今日のおみくじ</title>
+  <style>
+    body {
+      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      text-align: center;
+      background-color: #fffaf5;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 28px;
+      color: #8B0000;
+      margin-bottom: 20px;
+    }
+    .date {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      padding: 14px;
+      font-size: 18px;
+      width: 80%;
+      max-width: 300px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 14px 24px;
+      font-size: 18px;
+      background-color: #8B0000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>本日のおみくじ</h1>
-    <div class="date" id="today"></div>
+  <h1>本日のおみくじ</h1>
+  <div class="date" id="today"></div>
 
-    <form id="omikujiForm">
-        <input type="text" id="theme" name="theme" placeholder="占いたい内容を入力（空欄でもOK）">
-        <br>
-        <button type="submit">おみくじを引く</button>
-    </form>
+  <form id="omikujiForm">
+    <input type="text" id="theme" name="theme" placeholder="占いたい内容を入力（空欄でもOK）">
+    <br>
+    <button type="submit">おみくじを引く</button>
+  </form>
 
-    <script>
-        // 今日の日付を日本式で表示
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const day = today.getDate();
-        document.getElementById('today').textContent = `${year}年${month}月${day}日のおみくじ`;
+  <script>
+    // 今日の日付を日本式で表示
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    document.getElementById('today').textContent = `${year}年${month}月${day}日のおみくじ`;
 
-        // フォーム送信イベント（ここでアニメーション画面に移動する予定）
-        document.getElementById('omikujiForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const theme = document.getElementById('theme').value;
-            // ここで次の画面にテーマを渡してアニメーションへ進む！
-            sessionStorage.setItem('theme', theme); // 仮でセッションストレージに保存
-            window.location.href = "/draw"; // 次のページへ遷移予定
-        });
-    </script>
+    // フォーム送信イベント（テーマを保存して次ページへ）
+    document.getElementById('omikujiForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const theme = document.getElementById('theme').value;
+      sessionStorage.setItem('theme', theme); // テーマを一時保存
+      window.location.href = "draw.html"; // 結果ページへ遷移
+    });
+  </script>
 </body>
 </html>
-
