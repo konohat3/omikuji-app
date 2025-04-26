@@ -1,101 +1,85 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>おみくじ結果</title>
-    <style>
-        body {
-            font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
-            text-align: center;
-            background-color: #fffaf5;
-            padding: 40px 20px;
-        }
-        h1 {
-            font-size: 28px;
-            color: #8B0000;
-            margin-bottom: 20px;
-        }
-        #diceAnimation {
-            width: 150px;
-            margin: 40px auto;
-        }
-        #omikujiResult {
-            display: none;
-            animation: slideUp 1s forwards;
-            margin-top: 30px;
-        }
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        img {
-            width: 80%;
-            max-width: 450px;
-            margin-bottom: 20px;
-        }
-        .theme {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おみくじ結果</title>
+  <style>
+    body {
+      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      text-align: center;
+      background-color: #fffaf5;
+      padding: 40px 20px;
+    }
 
-#omikujiResult {
-  display: none;
-  animation: slideUp 3s forwards; /* ←ここ、時間（3秒とか）自由に変えていいよ！ */
-  margin-top: 30px;
-}
+    #diceAnimation {
+      width: 100px; /* 🔥 サイコロGIFを小さく */
+      margin: 60px auto 40px auto;
+    }
 
-    </style>
+    #omikujiResult {
+      display: none;
+      animation: slideUp 3s forwards; /* 🔥 おみくじスライドもゆっくり */
+      margin-top: 30px;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    img {
+      width: 80%;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+
+    .themeText {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <h1>おみくじ結果</h1>
 
-    <!-- サイコロアニメーションエリア -->
-    <div id="diceAnimation">
-        <img src="static/saikoro.gif" alt="サイコロアニメーション">
-    </div>
+  <!-- ★「おみくじ結果」というh1は削除しました -->
 
-    <!-- おみくじ結果エリア -->
-    <div id="omikujiResult">
-        <img id="omikujiImage" src="" alt="おみくじ画像">
-        <p class="theme" id="themeText"></p>
-    </div>
+  <!-- サイコロアニメーションエリア -->
+  <div id="diceAnimation">
+    <img src="/static/saikoro.gif" alt="サイコロアニメーション">
+  </div>
 
-    <script>
-        // ページが読み込まれたら
-        window.onload = function() {
-            // 2秒後にアニメーションを非表示＆おみくじ画像表示
-            setTimeout(function() {
-                document.getElementById('diceAnimation').style.display = 'none';
-                document.getElementById('omikujiResult').style.display = 'block';
+  <!-- おみくじ結果表示エリア -->
+  <div id="omikujiResult">
+    <img id="omikujiImage" src="" alt="おみくじ結果">
+    <div class="themeText" id="themeDisplay"></div>
+  </div>
 
-                // 画像を指定（テスト用：eki_11.png）
-                const imagePath = 'static/eki_11.png';
-                document.getElementById('omikujiImage').src = imagePath;
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('diceAnimation').style.display = 'none';
+        document.getElementById('omikujiResult').style.display = 'block';
 
-                // セッションストレージから占いテーマを取得して表示
-                const theme = sessionStorage.getItem('theme') || "";
-                if (theme) {
-                    document.getElementById('themeText').textContent = `占ったテーマ：${theme}`;
-                }
-            }, 2000); // 2秒後
+        // おみくじ画像表示
+        const imagePath = '/static/eki_11.png'; // テスト用
+        document.getElementById('omikujiImage').src = imagePath;
+
+        // テーマ表示
+        const theme = sessionStorage.getItem('theme') || '';
+        if (theme) {
+          document.getElementById('themeDisplay').textContent = `占ったテーマ：${theme}`;
         }
-    </script>
+      }, 7000); // 🔥 7秒間サイコロを見せる
+    }
+  </script>
+
 </body>
 </html>
+
