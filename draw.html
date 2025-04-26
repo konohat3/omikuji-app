@@ -1,82 +1,77 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>おみくじ</title>
-    <style>
-        body {
-            font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
-            text-align: center;
-            background-color: #fffaf5;
-            padding: 40px 20px;
-        }
-        #diceAnimation {
-            width: 100px; /* ←サイコロを小さめに調整（もともと150pxくらいでした） */
-            margin: 40px auto;
-        }
-        #omikujiResult {
-            display: none;
-            animation: slideUp 2s forwards; /* ゆっくりスライドさせる */
-            margin-top: 30px;
-        }
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(200px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        img {
-            width: 80%;
-            max-width: 450px;
-            margin-bottom: 20px;
-        }
-        .theme {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おみくじ</title>
+  <style>
+    body {
+      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      text-align: center;
+      background-color: #fffaf5;
+      padding: 40px 20px;
+    }
+    #diceAnimation {
+      width: 80px; /* サイコロ小さめ */
+      margin: 80px auto;
+    }
+    #omikujiResult {
+      display: none;
+      animation: slideUp 2s forwards;
+      margin-top: 30px;
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(200px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    img {
+      width: 80%;
+      max-width: 450px;
+      margin-bottom: 20px;
+    }
+    .theme {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- 鳥居の画像 -->
-    <img src="/static/torii.png" alt="鳥居" style="width: 100%; max-width: 400px; margin-bottom: 20px;">
+  <!-- サイコロアニメーションエリア -->
+  <div id="diceAnimation">
+    <img src="/static/saikoro.gif" alt="サイコロアニメーション">
+  </div>
 
-    <!-- サイコロアニメーションエリア -->
-    <div id="diceAnimation">
-        <img src="/static/saikoro.gif" alt="サイコロアニメーション">
-    </div>
+  <!-- おみくじ結果エリア -->
+  <div id="omikujiResult">
+    <img id="omikujiImage" src="" alt="おみくじ画像">
+    <p class="theme" id="themeText"></p>
+  </div>
 
-    <!-- おみくじ結果エリア -->
-    <div id="omikujiResult">
-        <img id="omikujiImage" src="" alt="おみくじ画像">
-        <p class="theme" id="themeText"></p>
-    </div>
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('diceAnimation').style.display = 'none';
+        document.getElementById('omikujiResult').style.display = 'block';
 
-    <script>
-        // ページが読み込まれたら
-        window.onload = function() {
-            setTimeout(function() {
-                document.getElementById('diceAnimation').style.display = 'none';
-                document.getElementById('omikujiResult').style.display = 'block';
+        // 仮のおみくじ画像
+        const omikujiPath = "/static/eki_11.png";
+        document.getElementById('omikujiImage').src = omikujiPath;
 
-                // 仮のおみくじ画像（固定でeki_11.pngを表示）
-                const omikujiPath = "/static/eki_11.png";
-                document.getElementById('omikujiImage').src = omikujiPath;
-
-                // テーマ（占いたい内容）表示
-                const theme = sessionStorage.getItem('theme') || "";
-                if (theme.trim() !== "") {
-                    document.getElementById('themeText').textContent = `占ったテーマ：${theme}`;
-                }
-            }, 4000); // ←サイコロ表示時間を5秒に変更（もともと2秒でした）
+        // テーマ（占いたい内容）
+        const theme = sessionStorage.getItem('theme') || "";
+        if (theme.trim() !== "") {
+          document.getElementById('themeText').textContent = `占ったテーマ：${theme}`;
         }
-    </script>
+      }, 3000); // ←3秒にしました！
+    }
+  </script>
+
 </body>
 </html>
-
-
