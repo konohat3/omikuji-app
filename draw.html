@@ -1,83 +1,84 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>おみくじ結果</title>
-  <style>
-    body {
-      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
-      text-align: center;
-      background-color: #fffaf5;
-      padding: 40px 20px;
-    }
-    h1 {
-      font-size: 28px;
-      color: #8B0000;
-      margin-bottom: 20px;
-    }
-    #diceAnimation {
-      width: 150px;
-      margin: 40px auto;
-    }
-    #omikujiResult {
-      display: none;
-      animation: slideUp 1s forwards;
-      margin-top: 30px;
-    }
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(100px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    img {
-      width: 80%;
-      max-width: 450px;
-      margin-bottom: 20px;
-    }
-    .theme {
-      margin-top: 20px;
-      font-size: 18px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おみくじ結果</title>
+    <style>
+        body {
+            font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+            text-align: center;
+            background-color: #fffaf5;
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 28px;
+            color: #8B0000;
+            margin-bottom: 20px;
+        }
+        #diceAnimation {
+            width: 150px;
+            margin: 40px auto;
+        }
+        #omikujiResult {
+            display: none;
+            animation: slideUp 1s forwards;
+            margin-top: 30px;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        img {
+            width: 80%;
+            max-width: 450px;
+            margin-bottom: 20px;
+        }
+        .theme {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-  <h1>おみくじ結果</h1>
+    <h1>おみくじ結果</h1>
 
-  <!-- サイコロアニメーションエリア -->
-  <div id="diceAnimation">
-    <img src="static/dice_animation.gif" alt="サイコロアニメーション">
-  </div>
+    <!-- サイコロアニメーションエリア -->
+    <div id="diceAnimation">
+        <img src="static/saikoro.gif" alt="サイコロアニメーション">
+    </div>
 
-  <!-- おみくじ結果エリア -->
-  <div id="omikujiResult">
-    <img id="omikujiImage" src="" alt="おみくじ画像">
-    <p class="theme" id="themeText"></p>
-  </div>
+    <!-- おみくじ結果エリア -->
+    <div id="omikujiResult">
+        <img id="omikujiImage" src="" alt="おみくじ画像">
+        <p class="theme" id="themeText"></p>
+    </div>
 
-  <script>
-    window.onload = function() {
-      setTimeout(function () {
-        document.getElementById('diceAnimation').style.display = 'none';
-        document.getElementById('omikujiResult').style.display = 'block';
+    <script>
+        // ページが読み込まれたら
+        window.onload = function() {
+            // 2秒後にアニメーションを非表示＆おみくじ画像表示
+            setTimeout(function() {
+                document.getElementById('diceAnimation').style.display = 'none';
+                document.getElementById('omikujiResult').style.display = 'block';
 
-        // ランダムでおみくじ画像を選ぶ（1～64）
-        const omikujiNumber = Math.floor(Math.random() * 64) + 1;
-const imagePath = `/static/eki_${String(omikujiNumber).padStart(2, '0')}.png`;
-document.getElementById('omikujiImage').src = imagePath;
-        
-        // テーマを取得して表示
-        const theme = sessionStorage.getItem('theme') || "";
-        if (theme) {
-          document.getElementById('themeText').textContent = `占ったテーマ：${theme}`;
+                // 画像を指定（テスト用：eki_11.png）
+                const imagePath = 'static/eki_11.png';
+                document.getElementById('omikujiImage').src = imagePath;
+
+                // セッションストレージから占いテーマを取得して表示
+                const theme = sessionStorage.getItem('theme') || "";
+                if (theme) {
+                    document.getElementById('themeText').textContent = `占ったテーマ：${theme}`;
+                }
+            }, 2000); // 2秒後
         }
-      }, 2000); // 2秒後に表示切替
-    };
-  </script>
+    </script>
 </body>
 </html>
