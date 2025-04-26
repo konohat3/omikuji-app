@@ -68,8 +68,8 @@
 
         // ランダムでおみくじ画像を選ぶ（1～64）
         const omikujiNumber = Math.floor(Math.random() * 64) + 1;
-        const omikujiPath = `static/omikuji${String(omikujiNumber).padStart(2, '0')}.png`;
-        document.getElementById('omikujiImage').src = omikujiPath;
+　　　　 const imagePath = `/static/eki_${String(omikujiNumber).padStart(2, '0')}.png`;
+　　　　 document.getElementById('omikujiImage').src = imagePath;
 
         // テーマを取得して表示
         const theme = sessionStorage.getItem('theme') || "";
