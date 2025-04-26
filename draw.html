@@ -44,6 +44,23 @@
             margin-top: 20px;
             font-size: 18px;
         }
+        @keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#omikujiResult {
+  display: none;
+  animation: slideUp 3s forwards; /* ←ここ、時間（3秒とか）自由に変えていいよ！ */
+  margin-top: 30px;
+}
+
     </style>
 </head>
 <body>
