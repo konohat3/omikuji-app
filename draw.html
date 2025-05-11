@@ -33,12 +33,12 @@
     img {
       width: 80%;
       max-width: 450px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     .theme {
-      margin-top: 20px;
+      margin-top: 10px;
       font-size: 18px;
-      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      color: #444;
     }
   </style>
 </head>
@@ -49,15 +49,15 @@
     <img src="/static/saikoro.gif" alt="サイコロアニメーション">
   </div>
 
-  <!-- おみくじ表示部分 -->
+  <!-- おみくじ結果表示 -->
   <div id="omikujiResult">
     <img id="omikujiImage" src="" alt="おみくじ画像">
     <p class="theme" id="themeText"></p>
   </div>
 
   <script>
-    window.onload = function() {
-      setTimeout(function() {
+    window.onload = function () {
+      setTimeout(function () {
         document.getElementById('diceAnimation').style.display = 'none';
         document.getElementById('omikujiResult').style.display = 'block';
 
@@ -68,10 +68,10 @@
 
         const theme = sessionStorage.getItem('theme') || "";
         if (theme.trim() !== "") {
-          document.getElementById('themeText').textContent = `占ったテーマ：${theme}`;
+          document.getElementById('themeText').textContent = `テーマ：${theme}`;
         }
       }, 3000);
-    }
+    };
   </script>
 
 </body>
