@@ -4,14 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>易おみくじ</title>
-  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'DotGothic16', monospace;
+      font-family: 'Yu Mincho', 'Hiragino Mincho ProN', serif;
       text-align: center;
-      background-color: #f0f8ff;
+      background-color: #fffaf5;
       padding: 40px 20px;
-      image-rendering: pixelated;
     }
     img {
       max-width: 80%;
@@ -19,41 +17,34 @@
       margin-bottom: 20px;
     }
     h1 {
-      font-size: 32px;
-      color: #333;
+      font-size: 28px;
+      color: #8B0000;
       margin-bottom: 20px;
-      text-shadow: 2px 2px #ccc;
     }
     input[type="text"] {
-      padding: 12px;
+      padding: 14px;
       font-size: 18px;
       width: 80%;
       max-width: 300px;
       box-sizing: border-box;
-      font-family: 'DotGothic16', monospace;
     }
     button {
       margin-top: 20px;
       padding: 14px 24px;
       font-size: 18px;
-      background-color: #0066cc;
+      background-color: #8B0000;
       color: white;
-      border: 2px solid #003366;
-      border-radius: 4px;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      font-family: 'DotGothic16', monospace;
-    }
-    .theme {
-      margin-top: 20px;
-      font-size: 18px;
-      font-family: 'DotGothic16', monospace;
     }
   </style>
 </head>
 <body>
 
-  <!-- ドット風ロゴ -->
+  <!-- 鳥居の画像 -->
   <img src="torii.jpg" alt="鳥居の画像">
+
   <h1>易おみくじ</h1>
 
   <form id="omikujiForm">
@@ -66,8 +57,8 @@
     document.getElementById('omikujiForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const theme = document.getElementById('theme').value;
-      sessionStorage.setItem('theme', theme);
-      window.location.href = "/draw";
+      sessionStorage.setItem('theme', theme); // テーマを一時保存
+      window.location.href = "/draw"; // 結果ページへ遷移
     });
   </script>
 
